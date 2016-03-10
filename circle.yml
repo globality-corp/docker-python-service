@@ -24,6 +24,10 @@ dependencies:
     - docker info
     - docker build -t python-service:{CIRCLE_BRANCH}-{CIRCLE_SHA1} .
 
+test:
+  override:
+    - echo "Successfully built new image!"
+
 deployment:
   hub:
     branch: feature/circleci
@@ -32,7 +36,3 @@ deployment:
       - eval $(aws ecr get-login --region us-east-1)
       - docker tag python-service:{CIRCLE_BRANCH}-{CIRCLE_SHA1} 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:{CIRCLE_BRANCH}-{CIRCLE_SHA1}
       - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:{CIRCLE_BRANCH}-{CIRCLE_SHA1}
-
-  test:
-    override:
-      - echo "Successfully built new image!"
