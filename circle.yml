@@ -17,20 +17,15 @@ machine:
   services:
     - docker
 
-dependencies:
-  override:
-    - BUILD_TAG=$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
-    - docker build -t python-service:$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1 .
-
 test:
   override:
     - echo "Successfully built new image!"
 
 deployment:
-  hub:
+  ecr:
     branch: feature/circleci
     commands:
-      - BUILD_TAG=$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
+      - docker build -t python-service:$(echo $CIRCLE_BRANCH | tr '/' '_') python-service:$CIRCLE_SHA1 .
       - eval $(aws ecr get-login --region us-east-1)
-      - docker tag python-service:$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
-      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
+      - docker tag python-service:$CIRCLE_SHA1 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$CIRCLE_SHA1
+      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$CIRCLE_SHA1
