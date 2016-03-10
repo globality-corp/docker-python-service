@@ -28,5 +28,5 @@ deployment:
     branch: feature/circleci
     commands:
       - eval $(aws ecr get-login --region us-east-1)
-      - docker tag python-service:$BUILD_TAG 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$BUILD_TAG
-      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$BUILD_TAG
+      - docker tag python-service:mouse 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:mouse
+      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:mouse
