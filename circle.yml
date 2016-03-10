@@ -19,14 +19,20 @@ machine:
 
 dependencies:
   override:
-    - export BUILD_TAG=dino-{CIRCLE_SHA1}
+    - BUILD_TAG={CIRCLE_BRANCH}-{CIRCLE_SHA1}
+    - echo $BUILD_TAG
     - docker info
-    - docker build -t python-service:mouse .
+    - docker build -t python-service:{CIRCLE_BRANCH}-{CIRCLE_SHA1} .
 
 deployment:
   hub:
     branch: feature/circleci
     commands:
+      - echo $BUILD_TAG
       - eval $(aws ecr get-login --region us-east-1)
-      - docker tag python-service:mouse 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:mouse
-      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:mouse
+      - docker tag python-service:{CIRCLE_BRANCH}-{CIRCLE_SHA1} 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:{CIRCLE_BRANCH}-{CIRCLE_SHA1}
+      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:{CIRCLE_BRANCH}-{CIRCLE_SHA1}
+
+  test:
+    override:
+      - echo "Successfully built new image!"
