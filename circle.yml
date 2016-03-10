@@ -20,7 +20,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t python-service:$CIRCLE_BRANCH-$CIRCLE_SHA1
+    - docker build -t python-service:$CIRCLE_BRANCH-$CIRCLE_SHA1 .
 
 deployment:
   hub:
