@@ -30,3 +30,4 @@ deployment:
       - docker tag python-service:$CIRCLE_SHA1 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$CIRCLE_SHA1
       - docker tag python-service:$CIRCLE_SHA1 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$CIRCLE_BRANCH
       - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$CIRCLE_SHA1
+      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$CIRCLE_BRANCH
