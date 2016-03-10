@@ -19,13 +19,14 @@ machine:
 
 dependencies:
   override:
+    - export BUILD_TAG=$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
     - docker info
-    - docker build -t python-service:$CIRCLE_BRANCH-$CIRCLE_SHA1 .
+    - docker build -t python-service:$BUILD_TAG .
 
 deployment:
   hub:
     branch: feature/circleci
     commands:
       - eval $(aws ecr get-login --region us-east-1)
-      - docker tag python-service:$CIRCLE_BRANCH-$CIRCLE_SHA1 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$CIRCLE_BRANCH-$CIRCLE_SHA1
-      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$CIRCLE_BRANCH-$CIRCLE_SHA1
+      - docker tag python-service:$BUILD_TAG 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$BUILD_TAG
+      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$BUILD_TAG
