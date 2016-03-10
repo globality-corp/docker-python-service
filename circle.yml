@@ -21,7 +21,7 @@ dependencies:
   override:
     - export BUILD_TAG=dino-{CIRCLE_SHA1}
     - docker info
-    - docker build -t python-service:$BUILD_TAG .
+    - docker build -t python-service:mouse .
 
 deployment:
   hub:
