@@ -20,7 +20,7 @@ machine:
 dependencies:
   override:
     - BUILD_TAG=$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
-    - docker build -t python-service:$BUILD_TAG .
+    - docker build -t python-service:$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1 .
 
 test:
   override:
