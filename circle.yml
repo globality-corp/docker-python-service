@@ -19,7 +19,7 @@ machine:
 
 dependencies:
   override:
-    - export BUILD_TAG=dino-$CIRCLE_SHA1
+    - export BUILD_TAG=dino-{CIRCLE_SHA1}
     - docker info
     - docker build -t python-service:$BUILD_TAG .
 
