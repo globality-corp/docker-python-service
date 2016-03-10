@@ -32,5 +32,5 @@ deployment:
     commands:
       - BUILD_TAG=$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
       - eval $(aws ecr get-login --region us-east-1)
-      - docker tag python-service:$BUILD_TAG 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$BUILD_TAG
-      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$BUILD_TAG
+      - docker tag python-service:$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
+      - docker push 021749107756.dkr.ecr.us-east-1.amazonaws.com/python-service:$(echo $CIRCLE_BRANCH | tr '/' '_')-$CIRCLE_SHA1
