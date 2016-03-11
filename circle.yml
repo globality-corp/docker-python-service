@@ -28,6 +28,6 @@ deployment:
     commands:
       - eval $(aws ecr get-login --region us-east-1)
       - docker tag python-service:$CIRCLE_SHA1 $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:$CIRCLE_SHA1
-      - docker tag python-service:$CIRCLE_SHA1 $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:"${CIRCLE_BRANCH/\//z}"
+      - docker tag python-service:$CIRCLE_SHA1 $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:"${CIRCLE_BRANCH/\//_}"
       - docker push $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:$CIRCLE_SHA1
-      - docker push $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:"${CIRCLE_BRANCH/\//z}"
+      - docker push $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:"${CIRCLE_BRANCH/\//_}"
