@@ -1,0 +1,33 @@
+#
+# CircleCI Configuration for publishing a base docker image for Python services to Amazon ecr.
+#
+#
+# - This script requires:
+#     - CIRCLE_SHA1: the commit associated with this build (available in all circleci builds)
+#     - CIRCLE_BRANCH: the branch associated with this commit (available in all circleci builds)
+#     - ECR_INSTANCE_ID: the id of your Amazon ECR instance
+#     - ECR_DOMAIN: The domain associated with AWS ECR.
+#     - aws credentials
+#
+########################################################################################################
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build -t python-service:$CIRCLE_SHA1 .
+
+test:
+  override:
+    - echo "Building python-service container!"
+
+deployment:
+  ecr:
+    branch: feature/circleci
+    commands:
+      - eval $(aws ecr get-login --region us-east-1)
+      - docker tag python-service:$CIRCLE_SHA1 $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:$CIRCLE_SHA1
+      - docker tag python-service:$CIRCLE_SHA1 $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:"${CIRCLE_BRANCH/\//_}"
+      - docker push $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:$CIRCLE_SHA1
+      - docker push $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:"${CIRCLE_BRANCH/\//_}"
