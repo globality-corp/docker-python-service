@@ -23,15 +23,16 @@ test:
     - echo "Building python-service container!"
 
 deployment:
-  ecr:
-    branch: 'develop'
+  dev:
+    branch: develop
     commands:
       - eval $(aws ecr get-login --region us-east-1)
       - docker tag python-service:$CIRCLE_SHA1 $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:$CIRCLE_SHA1
       - docker tag python-service:$CIRCLE_SHA1 $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:"${CIRCLE_BRANCH/\//_}"
       - docker push $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:$CIRCLE_SHA1
       - docker push $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:"${CIRCLE_BRANCH/\//_}"
-    branch: 'master'
+  release:
+    branch: master
     commands:
       - eval $(aws ecr get-login --region us-east-1)
       - docker tag python-service:$CIRCLE_SHA1 $ECR_INSTANCE_ID.$ECR_DOMAIN/python-service:$CIRCLE_SHA1
