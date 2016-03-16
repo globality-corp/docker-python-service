@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:jessie
 
 ENV CORE_PACKAGES curl libpq5 locales python python-pip libpython2.7
 ENV CORE_PIP_PACKAGES pip nose setuptools
@@ -29,6 +29,9 @@ WORKDIR src
 
 # Expose on the standard HTTP port
 EXPOSE 80
+
+# Label the image
+LABEL microcosm=python-service
 
 # Copy entrypoint
 COPY entrypoint.sh /src/
