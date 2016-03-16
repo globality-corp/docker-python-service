@@ -1,0 +1,10 @@
+approve_by_comment: true
+approve_regex: ^(Approved|LGTM|[+]1)
+reject_regex: ^Rejected
+reset_on_push: false
+reviewers:
+  required: 1
+  members:
+    - adamhadani
+    - cdm-ium
+    - jessemyers
