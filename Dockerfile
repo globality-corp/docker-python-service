@@ -3,7 +3,7 @@ FROM debian:jessie
 ENV CORE_PACKAGES curl libpq5 locales python python-pip libpython2.7
 ENV CORE_PIP_PACKAGES pip nose setuptools
 ENV BUILD_PACKAGES build-essential libpq-dev python-dev libffi-dev libssl-dev
-ENV PIP_BUILD_PACKAGES psycopg2 uwsgi flask alembic requests[security] SQLAlchemy SQLAlchemy-Utils
+ENV PIP_BUILD_PACKAGES cryptography psycopg2 uwsgi flask alembic requests[security] SQLAlchemy SQLAlchemy-Utils
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ${CORE_PACKAGES} && \
