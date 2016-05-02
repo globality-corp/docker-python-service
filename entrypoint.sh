@@ -28,7 +28,7 @@ elif [ "$1" = "dev" ]; then
     if [ -e "manage.py" ]; then
 	# Flask-Script
 	exec python manage.py runserver --host 0.0.0.0 --port 80
-    else:
+    else
 	# microcosm
 	exec runserver --host 0.0.0.0 --port 80
     fi
