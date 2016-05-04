@@ -22,7 +22,7 @@
 if [ "$1" = "uwsgi" ]; then
     exec uwsgi --http-socket 0.0.0.0:80 --drop-after-init \
                --uid nobody --gid nogroup \
-               --master --processes ${UWSGI_NUM_PROCESSES:-4} \
+               --processes ${UWSGI_NUM_PROCESSES:-4} \
                --need-app --module ${NAME}.wsgi:app
 elif [ "$1" = "dev" ]; then
     if [ -e "manage.py" ]; then
