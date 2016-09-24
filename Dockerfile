@@ -22,7 +22,7 @@ ENV LC_ALL en_US.UTF-8
 
 
 # We need these libraries often enough (and they're binary), so we install them upfront
-ENV PIP_COMMON_PACKAGES alembic cffi cryptography flask MarkupSafe ndg-httpsclient requests[security] psycopg2 SQLAlchemy SQLAlchemy-Utils PyYAML uwsgi
+ENV PIP_COMMON_PACKAGES alembic cffi cryptography flask MarkupSafe ndg-httpsclient psycopg2 pycrypto requests[security] SQLAlchemy SQLAlchemy-Utils PyYAML uwsgi
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ${BUILD_PACKAGES} && \
     pip install --upgrade ${PIP_COMMON_PACKAGES} && \
