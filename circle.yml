@@ -1,16 +1,8 @@
-#
-# CircleCI Configuration for publishing a base docker image for Python services to Amazon ecr.
-#
-#
-# - This script requires:
-#     - CIRCLE_SHA1: the commit associated with this build (available in all circleci builds)
-#     - CIRCLE_BRANCH: the branch associated with this commit (available in all circleci builds)
-#     - ECR_INSTANCE_ID: the id of your Amazon ECR instance
-#     - ECR_DOMAIN: The domain associated with AWS ECR.
-#     - aws credentials
-#
-########################################################################################################
+# CircleCI Configuration file
+
 machine:
+  pre:
+    - sudo curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
   services:
     - docker
 
