@@ -41,7 +41,7 @@ EXPOSE 80
 LABEL microcosm.type="python-service"
 
 # Don't freeze by default
-ARG freeze=""
+ARG FREEZE=""
 
 # Expose as a uwsgi application
 COPY entrypoint.sh /src/
