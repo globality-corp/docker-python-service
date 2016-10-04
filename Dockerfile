@@ -45,5 +45,6 @@ ARG freeze=""
 
 # Expose as a uwsgi application
 COPY entrypoint.sh /src/
+COPY build.sh /src/
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["uwsgi"]
