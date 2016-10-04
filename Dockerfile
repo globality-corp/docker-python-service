@@ -40,9 +40,6 @@ EXPOSE 80
 # Label the image
 LABEL microcosm.type="python-service"
 
-# Don't freeze by default
-ARG FREEZE=""
-
 # Expose as a uwsgi application
 COPY entrypoint.sh /src/
 COPY build.sh /src/
