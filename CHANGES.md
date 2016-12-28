@@ -2,6 +2,10 @@
 
 Update this file when creating new releases, with most recent releases first.
 
+## Version 1.5.0
+
+ - Removed `pycrypto` dependency thanks to Credstash changes upstream
+
 
 ## Version 0.7.0
 
