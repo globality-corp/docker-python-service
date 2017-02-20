@@ -37,9 +37,9 @@ ENV PIP_COMMON_PACKAGES alembic cffi cryptography flask MarkupSafe psycopg2 pyOp
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ${BUILD_PACKAGES} && \
     pip install --upgrade ${PIP_COMMON_PACKAGES}
-    # apt-get remove --purge -y ${BUILD_PACKAGES} && \
-    # apt-get autoremove -y && \
-    # rm -rf /var/lib/apt/lists/*
+    apt-get remove --purge -y ${BUILD_PACKAGES} && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 
 # Work in /src
