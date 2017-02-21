@@ -2,6 +2,12 @@
 
 Update this file when creating new releases, with most recent releases first.
 
+## Version 1.5.1
+
+ - Update `pip` dependencies and `apt` packages to reflect latest requirements
+ - Change condition in which to use `-r requirements.txt` or `setup.py`
+ - Add `--master` to default `uwsgi` run behavior
+
 ## Version 1.5.0
 
  - Removed `pycrypto` dependency thanks to Credstash changes upstream
