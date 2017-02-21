@@ -7,11 +7,11 @@ ENV PY_VERSION_TMP=${PY_MAJOR}${PY_MINOR}
 ENV PY_VERSION=${PY_VERSION_TMP:-2.7}
 
 # We use these packages when we build a Python binary library
-ENV BUILD_PACKAGES build-essential libpq-dev python${PY_MAJOR}-dev libffi-dev libssl-dev
+ENV BUILD_PACKAGES build-essential libpcre3-dev libpq-dev python${PY_MAJOR}-dev libffi-dev libssl-dev
 
 
 # We always need these packages to do Python
-ENV CORE_PACKAGES curl libpq5 locales python${PY_MAJOR} python${PY_MAJOR}-pip libpython${PY_VERSION}
+ENV CORE_PACKAGES curl libpq5 libpcre3 locales python${PY_MAJOR} python${PY_MAJOR}-pip libpython${PY_VERSION}
 ENV CORE_PIP_PACKAGES pip nose setuptools
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ${CORE_PACKAGES} && \
@@ -33,7 +33,7 @@ ENV LC_ALL en_US.UTF-8
 
 
 # We need these libraries often enough (and they're binary), so we install them upfront
-ENV PIP_COMMON_PACKAGES alembic cffi cryptography flask MarkupSafe ndg-httpsclient psycopg2 requests[security] SQLAlchemy SQLAlchemy-Utils PyYAML uwsgi twisted
+ENV PIP_COMMON_PACKAGES alembic cffi cryptography flask MarkupSafe psycopg2 pyOpenSSL idna requests[security] SQLAlchemy SQLAlchemy-Utils PyYAML uwsgi twisted
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ${BUILD_PACKAGES} && \
     pip install --upgrade ${PIP_COMMON_PACKAGES} && \
